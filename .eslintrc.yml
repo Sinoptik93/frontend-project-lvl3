@@ -17,14 +17,12 @@ extends:
   - 'plugin:fp/recommended'
 
 rules:
-  no-console: 0
+  array-callback-return: 2
   arrow-body-style: 2
+  consistent-return: 1
   fp/no-mutating-methods: 2
   fp/no-unused-expression: 0
   fp/no-nil: 0
-  no-multiple-empty-lines: 1
-  consistent-return: 1
-  array-callback-return: 2
   import/extensions: 0
   max-len: [
       2,
@@ -33,6 +31,8 @@ rules:
         "ignoreComments": false
       }
   ]
+  no-console: 0
+  no-multiple-empty-lines: 1
   no-underscore-dangle: [
       2,
       {
