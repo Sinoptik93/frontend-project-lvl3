@@ -1,0 +1,47 @@
+env:
+  node: true
+  jest: true
+  browser: true
+
+plugins:
+  - jest
+  - babel
+  - fp
+
+parser: "@babel/eslint-parser"
+
+extends:
+  - 'airbnb-base'
+  - 'plugin:jest/recommended'
+  - 'plugin:import/recommended'
+  - 'plugin:fp/recommended'
+
+rules:
+  array-callback-return: 2
+  arrow-body-style: 2
+  consistent-return: 1
+  fp/no-mutating-methods: 2
+  fp/no-unused-expression: 0
+  fp/no-nil: 0
+  import/extensions: 0
+  max-len: [
+      2,
+      {
+        "code": 100,
+        "ignoreComments": false
+      }
+  ]
+  no-console: 0
+  no-multiple-empty-lines: 1
+  no-underscore-dangle: [
+      2,
+      {
+        "allow": [ "__filename", "__dirname" ]
+      }
+  ]
+
+settings:
+  import/resolver:
+    node:
+      extensions:
+        - ".js"
