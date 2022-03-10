@@ -1,17 +1,20 @@
 install:
 	npm ci
 
-test:
-	npm test
+build-dev:
+	npm run build
+
+build-prod:
+	npm run prod
 
 lint:
 	npm run lint
 
-lint:fix:
+lint-fix:
 	npm run lint:fix
 
 test:
-	npm run test.
+	npm run test .
 
 test-coverage:
 	npm test -- --coverage
