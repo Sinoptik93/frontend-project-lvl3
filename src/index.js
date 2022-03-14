@@ -1,3 +1,2 @@
-import './style.scss';
-
-console.log('test');
+import "./scripts/init.js";
+import "./styles/style.scss";
