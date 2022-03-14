@@ -52,6 +52,7 @@ export default (env, argv) => {
       test: /\.(scss)$/i,
       use: [
         devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+        "css-loader",
         "postcss-loader",
         "sass-loader",
       ],
