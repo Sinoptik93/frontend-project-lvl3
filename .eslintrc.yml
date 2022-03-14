@@ -11,10 +11,11 @@ plugins:
 parser: "@babel/eslint-parser"
 
 extends:
-  - 'airbnb-base'
-  - 'plugin:jest/recommended'
-  - 'plugin:import/recommended'
-  - 'plugin:fp/recommended'
+  - "airbnb-base"
+  - "plugin:jest/recommended"
+  - "plugin:import/recommended"
+  - "plugin:fp/recommended"
+  - "prettier"
 
 rules:
   array-callback-return: 2
