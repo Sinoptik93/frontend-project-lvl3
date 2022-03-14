@@ -1,22 +1,22 @@
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const devMode = process.env.NODE_ENV !== 'production';
+const devMode = process.env.NODE_ENV !== "production";
 
 const config = {
-  mode: devMode ? 'development' : 'production',
-  entry: './src/index.js',
+  mode: devMode ? "development" : "production",
+  entry: "./src/index.js",
   output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: "main.js",
+    path: path.resolve(__dirname, "dist"),
     clean: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: "./src/index.html",
     }),
   ],
   module: {
@@ -27,41 +27,36 @@ const config = {
     hot: true,
   },
   optimization: {
-    chunkIds: 'natural',
+    chunkIds: "natural",
   },
 };
 
 export default (env, argv) => {
-  const environment = argv.mode ?? 'production';
-  const devMode = environment !== 'production';
+  const environment = argv.mode ?? "production";
+  const devMode = environment !== "production";
 
-  config.devtool = devMode ? 'eval-source-map' : 'source-map';
+  config.devtool = devMode ? "eval-source-map" : "source-map";
 
   config.plugins = config.plugins.concat(
     devMode
       ? []
       : [
-        new MiniCssExtractPlugin({
-          filename: 'style.css',
-        }),
-      ],
+          new MiniCssExtractPlugin({
+            filename: "style.css",
+          }),
+        ]
   );
 
-  config.module.rules = config.module.rules.concat(
-    [
-      {
-        test: /\.(scss)$/i,
-        use: [
-          devMode
-            ? 'style-loader'
-            : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          'sass-loader',
-        ],
-      },
-    ],
-  );
+  config.module.rules = config.module.rules.concat([
+    {
+      test: /\.(scss)$/i,
+      use: [
+        devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+        "postcss-loader",
+        "sass-loader",
+      ],
+    },
+  ]);
 
   return config;
 };
