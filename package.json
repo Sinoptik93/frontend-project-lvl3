@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "export NODE_ENV=development && webpack --mode=development --watch",
+    "dev": "webpack serve",
     "build": "export NODE_ENV=development && webpack --mode=development",
     "prod": "export NODE_ENV=production && webpack --mode=production",
     "lint": "eslint src",
