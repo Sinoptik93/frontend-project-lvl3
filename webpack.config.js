@@ -22,6 +22,10 @@ const config = {
   module: {
     rules: [],
   },
+  devServer: {
+    static: "./dist",
+    hot: true,
+  },
   optimization: {
     chunkIds: 'natural',
   },
