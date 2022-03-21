@@ -6,7 +6,7 @@ env:
 plugins:
   - jest
   - babel
-  - fp
+#  - fp
 
 parser: "@babel/eslint-parser"
 
@@ -14,32 +14,34 @@ extends:
   - "airbnb-base"
   - "plugin:jest/recommended"
   - "plugin:import/recommended"
-  - "plugin:fp/recommended"
+#  - "plugin:fp/recommended"
   - "prettier"
 
 rules:
   array-callback-return: 2
   arrow-body-style: 2
   consistent-return: 1
-  fp/no-mutating-methods: 2
-  fp/no-unused-expression: 0
-  fp/no-nil: 0
+#  fp/no-mutating-methods: 2
+#  fp/no-unused-expression: 0
+#  fp/no-nil: 0
   import/extensions: 0
   max-len: [
       2,
       {
-        "code": 100,
-        "ignoreComments": false
+        code: 100,
+        ignoreComments: false
       }
   ]
   no-console: 0
   no-multiple-empty-lines: 1
+  no-param-reassig: 0
   no-underscore-dangle: [
       2,
       {
-        "allow": [ "__filename", "__dirname" ]
+        allow: [ "__filename", "__dirname" ]
       }
   ]
+  no-param-reassign: 0
 
 settings:
   import/resolver:
