@@ -1,1 +1,3 @@
-console.log("init");
+import application from "./application.js";
+
+application();

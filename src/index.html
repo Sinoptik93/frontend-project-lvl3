@@ -59,19 +59,19 @@
               Начните читать RSS сегодня! Это легко, это красиво.
             </p>
 
-            <form action="" class="rss-form text-body">
+            <form action="" class="rss-form text-body js-form">
               <div class="row">
                 <div class="col">
                   <div class="form-floating">
                     <input
                       id="url-input"
-                      autofocus=""
-                      required=""
                       name="url"
                       aria-label="url"
-                      class="form-control w-100"
+                      class="form-control w-100 js-input"
                       placeholder="ссылка RSS"
                       autocomplete="off"
+                      autofocus
+                      required
                     />
                     <label for="url-input">Ссылка RSS</label>
                   </div>
@@ -92,7 +92,7 @@
               Пример: https://ru.hexlet.io/lessons.rss
             </p>
 
-            <p class="feedback m-0 position-absolute small text-danger"></p>
+            <p class="feedback m-0 position-absolute small text-danger js-error-block"></p>
           </div>
         </div>
       </section>
@@ -115,7 +115,7 @@
             href="https://ru.hexlet.io/professions/frontend/projects/11"
             target="_blank"
           >
-            Hexlet
+            Chepukhin Sergey
           </a>
         </div>
       </div>
