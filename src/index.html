@@ -34,6 +34,7 @@
               role="button"
               target="_blank"
               rel="noopener noreferrer"
+              id="modal-read"
             >
               Читать полностью
             </a>
@@ -41,6 +42,7 @@
               type="button"
               class="btn btn-secondary"
               data-bs-dismiss="modal"
+              id="modal-close"
             >
               Закрыть
             </button>
@@ -53,9 +55,9 @@
       <section class="container-fluid bg-dark p-5">
         <div class="row">
           <div class="col-md-10 col-lg-8 mx-auto text-white">
-            <h1 class="display-3 mb-0">RSS агрегатор</h1>
+            <h1 class="display-3 mb-0" id="title">RSS агрегатор</h1>
 
-            <p class="lead">
+            <p class="lead" id="subtitle">
               Начните читать RSS сегодня! Это легко, это красиво.
             </p>
 
@@ -73,7 +75,7 @@
                       autofocus
                       required
                     />
-                    <label for="url-input">Ссылка RSS</label>
+                    <label for="url-input" id="input-placeholder">Ссылка RSS</label>
                   </div>
                 </div>
                 <div class="col-auto">
@@ -81,6 +83,7 @@
                     type="submit"
                     aria-label="add"
                     class="h-100 btn btn-lg btn-primary px-sm-5"
+                    id="submit-button"
                   >
                     Добавить
                   </button>
@@ -88,7 +91,7 @@
               </div>
             </form>
 
-            <p class="mt-2 mb-0 text-muted">
+            <p class="mt-2 mb-0 text-muted" id="form-example">
               Пример: https://ru.hexlet.io/lessons.rss
             </p>
 
@@ -110,7 +113,7 @@
     <footer class="footer border-top py-3 mt-5 bg-light">
       <div class="container-xl">
         <div class="text-center">
-          created by
+          <span id="created-by">created by</span>
           <a
             href="https://ru.hexlet.io/professions/frontend/projects/11"
             target="_blank"

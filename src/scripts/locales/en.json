@@ -1,0 +1,27 @@
+{
+  "meta": {
+    "title": "RSS Reader"
+  },
+  "heading": {
+    "title": "RSS Reader",
+    "subtitle": "Start read RSS today! It's easy and pretty."
+  },
+  "form": {
+    "placeholder": "RSS URL",
+    "submit": "Add",
+    "example": "Example: https://en.hexlet.io/lessons.rss"
+  },
+  "modal": {
+    "read": "Read",
+    "close": "Close"
+  },
+
+  "footer": {
+    "createdBy": "Created by"
+  },
+
+  "error": {
+    "default": "Unexpected error.",
+    "url": "Link must be a valid URL"
+  }
+}

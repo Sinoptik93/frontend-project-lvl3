@@ -1,0 +1,27 @@
+{
+  "meta": {
+    "title": "RSS агрегатор"
+  },
+  "heading": {
+    "title": "RSS агрегатор",
+    "subtitle": "Начните читать RSS сегодня! Это легко, это красиво."
+  },
+  "form": {
+    "placeholder": "Ссылка RSS",
+    "submit": "Добавить",
+    "example": "Пример: https://en.hexlet.io/lessons.rss"
+  },
+  "modal": {
+    "read": "Читать полностью",
+    "close": "закрыть"
+  },
+
+  "footer": {
+    "createdBy": "Создано"
+  },
+
+  "error": {
+    "default": "Неожиданная ошибка.",
+    "url": "Ссылка должна быть валидным URL"
+  }
+}
