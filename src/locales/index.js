@@ -5,7 +5,7 @@ import ru from "./ru.json";
 
 function initLocale() {
   i18next.init({
-    lng: "en",
+    lng: "ru",
     resources: {
       en: {
         translation: en,
