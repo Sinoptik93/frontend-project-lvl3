@@ -1,17 +1,4 @@
-import i18next from "i18next";
-
-const getHeader = () => {
-  const feedHeadingWrapper = document.createElement("div");
-  feedHeadingWrapper.classList.add("card-body");
-
-  const heading = document.createElement("h2");
-  heading.classList.add("h6", "m-0");
-  heading.innerText = i18next.t("feeds.heading");
-
-  feedHeadingWrapper.appendChild(heading);
-
-  return feedHeadingWrapper;
-};
+import getHeader from "./blockHeader.js";
 
 const getFeedItem = (data) => {
   const { title, description } = data;
@@ -50,7 +37,7 @@ const renderFeeds = (element, data) => {
     feedsList.appendChild(newFeed);
   });
 
-  element.appendChild(getHeader());
+  element.appendChild(getHeader("h6"));
   element.appendChild(feedsList);
 };
 

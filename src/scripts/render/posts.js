@@ -1,17 +1,6 @@
 import i18next from "i18next";
 
-const getHeader = () => {
-  const postsHeadingWrapper = document.createElement("div");
-  postsHeadingWrapper.classList.add("card-body");
-
-  const heading = document.createElement("h2");
-  heading.classList.add("h4", "m-0");
-  heading.innerText = i18next.t("posts.heading");
-
-  postsHeadingWrapper.appendChild(heading);
-
-  return postsHeadingWrapper;
-}
+import getHeader from "./blockHeader.js";
 
 const getPostItem = (data) => {
   const { id, title, link } = data;
@@ -62,7 +51,7 @@ const renderPosts = (element, data) => {
     postsList.innerHTML += newPost;
   });
 
-  element.appendChild(getHeader());
+  element.appendChild(getHeader("h4"));
   element.appendChild(postsList);
 };
 
