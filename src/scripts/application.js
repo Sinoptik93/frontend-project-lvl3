@@ -28,12 +28,6 @@ const application = () => {
     state.form.inputValue = "";
   };
 
-  const errCb = (error) => {
-    const { name, errors } = error;
-    state.form.isValid = false;
-    state.form.errors.push(...errors);
-  };
-
   input.addEventListener("keyup", () => {
     state.form.inputValue = input.value;
   });
@@ -43,9 +37,8 @@ const application = () => {
 
     const url = input.value;
 
-    validateUrl(url, errCb)
+    validateUrl(url)
       .then((result) => {
-        console.log(state.rssList.includes(result));
         const isNewItem = (siteName) => !state.rssList.includes(siteName);
 
         if (isNewItem(result)) {
@@ -57,7 +50,11 @@ const application = () => {
           state.form.errors.push("in array this site");
         }
       })
-      .catch(errCb);
+      .catch((error) => {
+        const { name, errors } = error;
+        state.form.isValid = false;
+        state.form.errors.push(...errors);
+      });
   });
 };
 
