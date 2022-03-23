@@ -1,6 +1,5 @@
-const getRSSData = (url) =>
-  fetch(url)
-    .then((response) => response.text())
-    .then((str) => new window.DOMParser().parseFromString(str, "text/xml"));
+import axios from "axios";
 
-export default getRSSData;
+const api = (url) => axios.get(url);
+
+export default api;
