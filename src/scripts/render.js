@@ -2,7 +2,7 @@ import onChange from "on-change";
 import renderFeeds from "./render/feeds.js";
 import renderPosts from "./render/posts.js";
 import renderMessageBlock from "./render/messageBlock.js";
-import {setInputStyle, setMessageStyle} from "./helpers/styleSetters.js";
+import setStyle from "./helpers/styleSetters.js";
 
 const getWatchState = (state, options) => {
   const { input, messageBlock, feedsBlock, postsBlock } = options;
@@ -10,8 +10,8 @@ const getWatchState = (state, options) => {
   return onChange(state, (path, value) => {
     switch (path) {
       case "form.isValid": {
-        setInputStyle(input, { isValid: value });
-        setMessageStyle(messageBlock, { isSuccess: value });
+        setStyle(input, { value, classValid: "is-valid", classInvalid: "is-invalid" });
+        setStyle(messageBlock, { value, classValid: "text-success", classInvalid: "text-danger" });
         break;
       }
       case "form.messages": {

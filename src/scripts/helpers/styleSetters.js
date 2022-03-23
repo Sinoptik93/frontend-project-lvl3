@@ -1,15 +1,14 @@
-const setInputStyle = (element, options = { isValid: false }) => {
-  const { isValid } = options;
-
-  element.classList[isValid ? "remove" : "add"]("is-invalid");
-  element.classList[isValid ? "add" : "remove"]("is-valid");
+const defaultOptions = {
+  value: false,
+  classValid: "is-valid",
+  classInvalid: "is-invalid",
 };
 
-const setMessageStyle = (element, options = { isSuccess: false }) => {
-  const { isSuccess } = options;
+const setStyle = (element, options = defaultOptions) => {
+  const { value, classValid, classInvalid } = options;
 
-  element.classList[isSuccess ? "remove" : "add"]("text-danger");
-  element.classList[isSuccess ? "add" : "remove"]("text-success");
+  element.classList[value ? "remove" : "add"](classInvalid);
+  element.classList[value ? "add" : "remove"](classValid);
 };
 
-export { setInputStyle, setMessageStyle };
+export default setStyle;
