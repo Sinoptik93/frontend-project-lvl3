@@ -2,7 +2,6 @@
   "name": "@hexlet/code",
   "version": "0.0.1",
   "description": "Hexlet third education project | frontend.",
-  "main": "index.js",
   "type": "module",
   "scripts": {
     "dev": "webpack serve",
