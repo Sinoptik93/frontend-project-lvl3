@@ -1,4 +1,4 @@
 node_modules
 dist
-__tests__
+__tests__/__fixtures__
 webpack.config.js

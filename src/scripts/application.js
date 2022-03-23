@@ -1,37 +1,48 @@
+import i18next from "i18next";
 import validateUrl from "./helpers/validate.js";
 import getRSSData from "./helpers/api.js";
-import getWatchedState from "./view.js";
+import getWatchedState from "./render.js";
+import parseXml from "./helpers/parseXml.js";
+import normalizeData from "./helpers/normalizeData.js";
 
 const application = () => {
   const initState = {
     form: {
       inputValue: "",
-      isValid: true,
-      errors: [],
+      isValid: null,
+      messages: [],
     },
-    rssList: [],
+    rss: {
+      sites: [],
+      feed: {
+        ids: [],
+        list: {},
+      },
+      posts: {
+        ids: [],
+        list: {},
+      },
+    },
   };
 
   const form = document.querySelector(".js-form");
   const input = document.querySelector("#url-input");
-  const blockErrors = document.querySelector(".js-error-block");
+  const messageBlock = document.querySelector(".js-message-block");
+  const feedsBlock = document.querySelector(".js-feeds");
+  const postsBlock = document.querySelector(".js-posts");
   const options = {
     input,
     form,
-    blockErrors,
+    messageBlock,
+    feedsBlock,
+    postsBlock,
   };
   const state = getWatchedState(initState, options);
 
   const resetFormData = () => {
     state.form.isValid = true;
-    state.form.errors = [];
+    state.form.messages = [];
     state.form.inputValue = "";
-  };
-
-  const errCb = (error) => {
-    const { name, errors } = error;
-    state.form.isValid = false;
-    state.form.errors.push(...errors);
   };
 
   input.addEventListener("keyup", () => {
@@ -43,21 +54,44 @@ const application = () => {
 
     const url = input.value;
 
-    validateUrl(url, errCb)
-      .then((result) => {
-        console.log(state.rssList.includes(result));
-        const isNewItem = (siteName) => !state.rssList.includes(siteName);
+    validateUrl(url)
+      .then((validUrl) => {
+        const isNewItem = (link) => !state.rss.sites.includes(link);
 
-        if (isNewItem(result)) {
-          state.rssList.push(url);
-          resetFormData();
-          getRSSData(result).then((response) => console.log(response));
+        if (isNewItem(validUrl)) {
+          state.rss.sites.push(url);
+          getRSSData(validUrl).then((response) => {
+            resetFormData();
+
+            const rawData = parseXml(response);
+
+            const { feed, posts } = normalizeData(rawData);
+
+            state.rss.feed.list = {
+              ...state.rss.feed.list,
+              ...feed.list,
+            };
+            state.rss.feed.ids.push(...feed.ids);
+
+            state.rss.posts.list = {
+              ...state.rss.posts.list,
+              ...posts.list,
+            };
+            state.rss.posts.ids.push(...posts.ids);
+
+            state.form.isValid = true;
+            state.form.messages.push(i18next.t("messages.successAdd"));
+          });
         } else {
           state.form.isValid = false;
-          state.form.errors.push("in array this site");
+          state.form.messages.push(i18next.t("error.duplicate"));
         }
       })
-      .catch(errCb);
+      .catch((error) => {
+        const { errors } = error;
+        state.form.isValid = false;
+        state.form.messages.push(...errors);
+      });
   });
 };
 

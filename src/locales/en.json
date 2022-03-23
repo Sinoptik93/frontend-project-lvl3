@@ -22,6 +22,20 @@
 
   "error": {
     "default": "Unexpected error.",
-    "url": "Link must be a valid URL"
+    "url": "Link must be a valid URL",
+    "duplicate": "RSS already added"
+  },
+
+  "messages": {
+    "successAdd": "RSS feed successful added"
+  },
+
+  "feeds": {
+    "heading": "Feeds"
+  },
+
+  "posts": {
+    "heading": "Posts",
+    "openModal": "View"
   }
 }

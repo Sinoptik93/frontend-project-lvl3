@@ -4,18 +4,16 @@ env:
   browser: true
 
 plugins:
-  - jest
   - babel
 #  - fp
 
 parser: "@babel/eslint-parser"
 
 extends:
-  - "airbnb-base"
-  - "plugin:jest/recommended"
-  - "plugin:import/recommended"
-#  - "plugin:fp/recommended"
-  - "prettier"
+  - airbnb-base
+  - plugin:import/recommended
+#  - plugin:fp/recommended
+  - prettier
 
 rules:
   array-callback-return: 2
@@ -38,13 +36,22 @@ rules:
   no-underscore-dangle: [
       2,
       {
-        allow: [ "__filename", "__dirname" ]
+        allow: [ __filename, __dirname ]
       }
   ]
   no-param-reassign: 0
+
+overrides:
+  - files: "./__tests__/*.test.js"
+    plugins:
+      - jest
+
+    extends:
+      - plugin:jest/all
+      - plugin:jest/style
 
 settings:
   import/resolver:
     node:
       extensions:
-        - ".js"
+        - .js
