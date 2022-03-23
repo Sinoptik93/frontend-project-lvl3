@@ -9,7 +9,7 @@
   "form": {
     "placeholder": "Ссылка RSS",
     "submit": "Добавить",
-    "example": "Пример: https://en.hexlet.io/lessons.rss"
+    "example": "Пример: https://ru.hexlet.io/lessons.rss"
   },
   "modal": {
     "read": "Читать полностью",
@@ -22,6 +22,20 @@
 
   "error": {
     "default": "Неожиданная ошибка.",
-    "url": "Ссылка должна быть валидным URL"
+    "url": "Ссылка должна быть валидным URL",
+    "duplicate": "RSS уже существует"
+  },
+
+  "messages": {
+    "successAdd": "RSS успешно загружен"
+  },
+
+  "feeds": {
+    "heading": "Фиды"
+  },
+
+  "posts": {
+    "heading": "Посты",
+    "openModal": "Просмотр"
   }
 }
