@@ -3,19 +3,7 @@ import { setLocale } from "yup";
 import en from "./en.json";
 import ru from "./ru.json";
 
-function initLocale() {
-  i18next.init({
-    lng: "ru",
-    resources: {
-      en: {
-        translation: en,
-      },
-      ru: {
-        translation: ru,
-      },
-    },
-  });
-
+const renderLocale = () => {
   // META
   document.querySelector("title").innerHTML = i18next.t("meta.title");
 
@@ -43,6 +31,30 @@ function initLocale() {
       url: i18next.t("error.url"),
     },
   });
+}
+
+function initLocale() {
+  i18next.init({
+    lng: "ru",
+    resources: {
+      en: {
+        translation: en,
+      },
+      ru: {
+        translation: ru,
+      },
+    },
+  });
+
+  renderLocale()
+
+  document.querySelector("#eng").addEventListener("click", () => {
+    i18next.changeLanguage("en").then(() => renderLocale());
+  });
+  document.querySelector("#rus").addEventListener("click", () => {
+    i18next.changeLanguage("ru").then(() => renderLocale());
+  });
+
 }
 
 export default initLocale;

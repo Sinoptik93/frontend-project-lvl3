@@ -25,11 +25,11 @@ const getWatchState = (state, options) => {
       case "rss.sites": {
         break;
       }
-      case "rss.feed.ids": {
+      case "rss.feed.list": {
         renderFeeds(feedsBlock, state.rss.feed);
         break;
       }
-      case "rss.posts.ids": {
+      case "rss.posts.list": {
         renderPosts(postsBlock, state.rss.posts);
         break;
       }

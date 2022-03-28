@@ -49,6 +49,21 @@ const application = () => {
     state.form.inputValue = input.value;
   });
 
+  const setFeedsState = (localState, data) => {
+    const keys = Object.keys(data);
+
+    keys.forEach((key) => {
+      localState.rss[key].list = {
+        ...data[key].list,
+        ...localState.rss[key].list,
+      };
+      localState.rss[key].ids = [
+        ...data[key].ids,
+        ...localState.rss[key].id
+      ];
+    });
+  };
+
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
@@ -60,28 +75,19 @@ const application = () => {
 
         if (isNewItem(validUrl)) {
           state.rss.sites.push(url);
+
           getRSSData(validUrl).then((response) => {
             resetFormData();
 
             const rawData = parseXml(response);
+            const data = normalizeData(rawData);
 
-            const { feed, posts } = normalizeData(rawData);
-
-            state.rss.feed.list = {
-              ...state.rss.feed.list,
-              ...feed.list,
-            };
-            state.rss.feed.ids.push(...feed.ids);
-
-            state.rss.posts.list = {
-              ...state.rss.posts.list,
-              ...posts.list,
-            };
-            state.rss.posts.ids.push(...posts.ids);
+            setFeedsState(state,data);
 
             state.form.isValid = true;
             state.form.messages.push(i18next.t("messages.successAdd"));
           });
+
         } else {
           state.form.isValid = false;
           state.form.messages.push(i18next.t("error.duplicate"));
