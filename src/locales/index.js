@@ -33,7 +33,7 @@ const renderLocale = () => {
   });
 }
 
-function initLocale() {
+const initLocale = () => {
   i18next.init({
     lng: "ru",
     resources: {
