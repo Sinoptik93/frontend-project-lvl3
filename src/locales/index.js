@@ -33,28 +33,34 @@ const renderLocale = () => {
   });
 }
 
-const initLocale = () => {
-  i18next.init({
-    lng: "ru",
-    resources: {
-      en: {
-        translation: en,
-      },
-      ru: {
-        translation: ru,
-      },
+const options = {
+  lng: "ru",
+  resources: {
+    en: {
+      translation: en,
     },
-  });
+    ru: {
+      translation: ru,
+    },
+  },
+}
+
+const localeHandler = (locale) => {
+  document.querySelector(`#${locale}`).addEventListener("click", () => {
+    i18next.changeLanguage(locale).then(() => renderLocale());
+  })
+}
+
+const initLocale = () => {
+  i18next.init(options);
 
   renderLocale()
 
-  document.querySelector("#eng").addEventListener("click", () => {
-    i18next.changeLanguage("en").then(() => renderLocale());
-  });
-  document.querySelector("#rus").addEventListener("click", () => {
-    i18next.changeLanguage("ru").then(() => renderLocale());
-  });
+  const localesList = Object.keys(options.resources);
 
+  localesList.forEach((locale) => {
+    localeHandler(locale);
+  })
 }
 
 export default initLocale;
