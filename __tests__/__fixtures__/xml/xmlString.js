@@ -1,4 +1,4 @@
-export default {data: `<?xml version="1.0" encoding="UTF-8"?>
+export default `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
     <title>Новые уроки на Хекслете</title>
@@ -27,4 +27,4 @@ export default {data: `<?xml version="1.0" encoding="UTF-8"?>
       <pubDate>Mon, 21 Mar 2022 11:53:45 +0000</pubDate>
     </item>
   </channel>
-</rss>`}
+</rss>`;

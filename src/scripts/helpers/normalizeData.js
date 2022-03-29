@@ -1,17 +1,11 @@
 import { normalize, schema } from "normalizr";
-import initIdGenerator from "./initIdGenerator.js";
 
-const getPostId = initIdGenerator();
-
-const initNormalizer = (data) => {
+const getNormalizedData = (data) => {
   const postSchema = new schema.Entity("post");
   const postsList = [postSchema];
   const rssFeed = new schema.Entity("feed", { postsList });
   const resultData = {
-    feed: {
-      ids: [],
-      list: {},
-    },
+    feed: {},
     posts: {
       ids: [],
       list: {},
@@ -19,33 +13,23 @@ const initNormalizer = (data) => {
   };
 
   const { result, entities } = normalize(data, rssFeed);
-  const { id, title, description, posts } = entities.feed[result];
+  const { title, description, posts } = entities.feed[result];
 
-  resultData.feed.ids.push(result);
-  resultData.feed.list = {
-    ...resultData.feed.list,
-    [result]: { id, title, description },
-  };
-
-  const normalizedPostsList = posts.reduce((acc, post) => {
-    const postId = getPostId();
+  const postReducer = (acc, post) => {
     const normalizedPost = {
-      id: postId,
-      guid: post.guid,
+      id: post.id,
       title: post.title,
       description: post.description,
       link: post.link,
-      state: "default",
     };
-    return { ...acc, [postId]: normalizedPost };
-  }, {});
+    return {...acc, [post.id]: normalizedPost}
+  }
 
-  const normalizedPostsIds = Object.keys(normalizedPostsList);
-
-  resultData.posts.ids = normalizedPostsIds;
-  resultData.posts.list = normalizedPostsList;
+  resultData.feed = { title, description };
+  resultData.posts.list = posts.reduce(postReducer, {});
+  resultData.posts.ids = posts.map((post) => post.id);
 
   return resultData;
 };
 
-export default initNormalizer;
+export default getNormalizedData;

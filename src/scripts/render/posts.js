@@ -24,7 +24,7 @@ const getPostItem = (data) => {
         <button 
           type="button" 
           class="btn btn-outline-primary btn-sm"
-          data-id="13"
+          data-id=${id}
           data-bs-toggle="modal"
           data-bs-target="#modal"
         >

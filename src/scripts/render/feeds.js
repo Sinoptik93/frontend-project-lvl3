@@ -20,11 +20,10 @@ const getFeedItem = (data) => {
   return feedItem;
 };
 
-const renderFeeds = (element, data) => {
+const renderFeeds = (element, feedsData) => {
   element.innerHTML = "";
-  const { ids, list } = data;
 
-  if (!ids.length) {
+  if (!feedsData.length) {
     element.innerHTML = "";
     return;
   }
@@ -32,8 +31,8 @@ const renderFeeds = (element, data) => {
   const feedsList = document.createElement("ul");
   feedsList.classList.add("list-group", "border-0", "rounded-0");
 
-  ids.forEach((id) => {
-    const newFeed = getFeedItem(list[id]);
+  feedsData.forEach((feed) => {
+    const newFeed = getFeedItem(feed);
     feedsList.appendChild(newFeed);
   });
 

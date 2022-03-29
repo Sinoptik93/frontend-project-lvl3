@@ -1,9 +1,11 @@
 import i18next from "i18next";
+import { isEqual, differenceWith } from "lodash";
 import validateUrl from "./helpers/validate.js";
 import getRSSData from "./helpers/api.js";
 import getWatchedState from "./render.js";
 import parseXml from "./helpers/parseXml.js";
-import normalizeData from "./helpers/normalizeData.js";
+import getNormalizedData from "./helpers/normalizeData.js";
+import timer from "./helpers/timer.js";
 
 const application = () => {
   const initState = {
@@ -14,10 +16,7 @@ const application = () => {
     },
     rss: {
       sites: [],
-      feed: {
-        ids: [],
-        list: {},
-      },
+      feeds: [],
       posts: {
         ids: [],
         list: {},
@@ -49,20 +48,68 @@ const application = () => {
     state.form.inputValue = input.value;
   });
 
-  const setFeedsState = (localState, data) => {
-    const keys = Object.keys(data);
+  const getDataList = (urlsList) =>
+    Promise.all(urlsList.map((url) => getRSSData(url)));
+  const parseDataList = (xmlList) => xmlList.map((xml) => parseXml(xml.data));
+  const normalizeDataList = (dataList) =>
+    dataList.map((data) => getNormalizedData(data));
 
-    keys.forEach((key) => {
-      localState.rss[key].list = {
-        ...data[key].list,
-        ...localState.rss[key].list,
+  const updateState = (localState, updatesList) => {
+    const updatedPostList = updatesList.reduce(
+      (acc, { posts }) => ({ ...acc, ...posts.list }),
+      {}
+    );
+    const updatedPostsIds = updatesList.reduce(
+      (acc, { posts }) => [...posts.ids, ...acc],
+      []
+    );
+
+    const newPostsIds = differenceWith(
+      updatedPostsIds,
+      localState.rss.posts.ids,
+      isEqual
+    );
+    const newPostsList = newPostsIds.reduce(
+      (acc, id) => ({ ...acc, [id]: updatedPostList[id] }),
+      {}
+    );
+
+    const updatedFeedList = updatesList.reduce(
+      (acc, { feed }) => [feed, ...acc],
+      []
+    );
+    const newFeed = differenceWith(
+      updatedFeedList,
+      localState.rss.feeds,
+      isEqual
+    );
+
+    if (newFeed.length) {
+      localState.rss.feeds = [...newFeed, ...localState.rss.feeds];
+    }
+
+    if (newPostsIds.length) {
+      localState.rss.posts.ids = [...newPostsIds, ...localState.rss.posts.ids];
+      localState.rss.posts.list = {
+        ...newPostsList,
+        ...localState.rss.posts.list,
       };
-      localState.rss[key].ids = [
-        ...data[key].ids,
-        ...localState.rss[key].id
-      ];
-    });
+    }
   };
+
+  const updateFeeds = (localState) => {
+    getDataList(localState.rss.sites).then((xmlList) => {
+      const parsedList = parseDataList(xmlList);
+      const normalizedList = normalizeDataList(parsedList);
+      updateState(localState, normalizedList);
+    });
+  }
+
+  const initTimer = timer((currentState) => {
+    updateFeeds(currentState);
+  }, 5000);
+
+  initTimer(state);
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -75,19 +122,9 @@ const application = () => {
 
         if (isNewItem(validUrl)) {
           state.rss.sites.push(url);
+          resetFormData();
 
-          getRSSData(validUrl).then((response) => {
-            resetFormData();
-
-            const rawData = parseXml(response);
-            const data = normalizeData(rawData);
-
-            setFeedsState(state,data);
-
-            state.form.isValid = true;
-            state.form.messages.push(i18next.t("messages.successAdd"));
-          });
-
+          updateFeeds(state);
         } else {
           state.form.isValid = false;
           state.form.messages.push(i18next.t("error.duplicate"));
@@ -100,5 +137,4 @@ const application = () => {
       });
   });
 };
-
 export default application;
