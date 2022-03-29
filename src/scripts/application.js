@@ -20,6 +20,7 @@ const application = () => {
       posts: {
         ids: [],
         list: {},
+        read: [],
       },
     },
   };
@@ -29,12 +30,14 @@ const application = () => {
   const messageBlock = document.querySelector(".js-message-block");
   const feedsBlock = document.querySelector(".js-feeds");
   const postsBlock = document.querySelector(".js-posts");
+  const popup = document.querySelector("#modal");
   const options = {
     input,
     form,
     messageBlock,
     feedsBlock,
     postsBlock,
+    popup,
   };
   const state = getWatchedState(initState, options);
 
@@ -46,6 +49,15 @@ const application = () => {
 
   input.addEventListener("keyup", () => {
     state.form.inputValue = input.value;
+  });
+
+  postsBlock.addEventListener("click", ({ target }) => {
+    const { id } = target.dataset;
+    const isNew = !state.rss.posts.read.includes(id);
+
+    if (id && isNew) {
+      state.rss.posts.read.push(id);
+    }
   });
 
   const getDataList = (urlsList) =>
@@ -103,7 +115,7 @@ const application = () => {
       const normalizedList = normalizeDataList(parsedList);
       updateState(localState, normalizedList);
     });
-  }
+  };
 
   const initTimer = timer((currentState) => {
     updateFeeds(currentState);
