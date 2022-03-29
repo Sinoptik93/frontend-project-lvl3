@@ -54,12 +54,12 @@ const application = () => {
   const normalizeDataList = (dataList) =>
     dataList.map((data) => getNormalizedData(data));
 
-  const updateState = (localState, dataList) => {
-    const updatedPostList = dataList.reduce(
+  const updateState = (localState, updatesList) => {
+    const updatedPostList = updatesList.reduce(
       (acc, { posts }) => ({ ...acc, ...posts.list }),
       {}
     );
-    const updatedPostsIds = dataList.reduce(
+    const updatedPostsIds = updatesList.reduce(
       (acc, { posts }) => [...posts.ids, ...acc],
       []
     );
@@ -74,7 +74,7 @@ const application = () => {
       {}
     );
 
-    const updatedFeedList = dataList.reduce(
+    const updatedFeedList = updatesList.reduce(
       (acc, { feed }) => [feed, ...acc],
       []
     );
@@ -97,12 +97,16 @@ const application = () => {
     }
   };
 
-  const initTimer = timer((currentState) => {
-    getDataList(currentState.rss.sites).then((xmlList) => {
+  const updateFeeds = (localState) => {
+    getDataList(localState.rss.sites).then((xmlList) => {
       const parsedList = parseDataList(xmlList);
       const normalizedList = normalizeDataList(parsedList);
-      updateState(currentState, normalizedList);
+      updateState(localState, normalizedList);
     });
+  }
+
+  const initTimer = timer((currentState) => {
+    updateFeeds(currentState);
   }, 5000);
 
   initTimer(state);
@@ -120,11 +124,7 @@ const application = () => {
           state.rss.sites.push(url);
           resetFormData();
 
-          getDataList(state.rss.sites).then((xmlList) => {
-            const parsedList = parseDataList(xmlList);
-            const normalizedList = normalizeDataList(parsedList);
-            updateState(state, normalizedList);
-          });
+          updateFeeds(state);
         } else {
           state.form.isValid = false;
           state.form.messages.push(i18next.t("error.duplicate"));
