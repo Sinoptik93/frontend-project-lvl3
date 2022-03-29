@@ -25,8 +25,8 @@ const getWatchState = (state, options) => {
       case "rss.sites": {
         break;
       }
-      case "rss.feed.list": {
-        renderFeeds(feedsBlock, state.rss.feed);
+      case "rss.feeds": {
+        renderFeeds(feedsBlock, state.rss.feeds);
         break;
       }
       case "rss.posts.list": {
@@ -34,7 +34,7 @@ const getWatchState = (state, options) => {
         break;
       }
       default: {
-        console.error(path);
+        break;
       }
     }
   });
