@@ -12,8 +12,16 @@ const getWatchState = (state, options) => {
   return onChange(state, (path, value, previousValue, params) => {
     switch (path) {
       case "form.isValid": {
-        setStyle(input, { value, classValid: "is-valid", classInvalid: "is-invalid" });
-        setStyle(messageBlock, { value, classValid: "text-success", classInvalid: "text-danger" });
+        setStyle(input, {
+          value,
+          classValid: "is-valid",
+          classInvalid: "is-invalid",
+        });
+        setStyle(messageBlock, {
+          value,
+          classValid: "text-success",
+          classInvalid: "text-danger",
+        });
         break;
       }
       case "form.messages": {

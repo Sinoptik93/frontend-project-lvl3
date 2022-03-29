@@ -5,6 +5,6 @@ const popupContent = (popupElement, postsList, postId) => {
   const { title, description } = postsList[postId];
   modalTitle.innerHTML = title;
   modalBody.innerHTML = description;
-}
+};
 
 export default popupContent;

@@ -3,6 +3,6 @@ const readStyle = (postId) => {
 
   targetTitle.classList.remove("fw-bold");
   targetTitle.classList.add("fw-normal", "link-secondary");
-}
+};
 
 export default readStyle;

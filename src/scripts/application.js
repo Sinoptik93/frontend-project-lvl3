@@ -51,14 +51,14 @@ const application = () => {
     state.form.inputValue = input.value;
   });
 
-  postsBlock.addEventListener("click", ({target}) => {
+  postsBlock.addEventListener("click", ({ target }) => {
     const { id } = target.dataset;
     const isNew = !state.rss.posts.read.includes(id);
 
     if (id && isNew) {
       state.rss.posts.read.push(id);
     }
-  })
+  });
 
   const getDataList = (urlsList) =>
     Promise.all(urlsList.map((url) => getRSSData(url)));
@@ -115,7 +115,7 @@ const application = () => {
       const normalizedList = normalizeDataList(parsedList);
       updateState(localState, normalizedList);
     });
-  }
+  };
 
   const initTimer = timer((currentState) => {
     updateFeeds(currentState);
