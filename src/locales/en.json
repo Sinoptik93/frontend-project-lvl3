@@ -9,7 +9,8 @@
   "form": {
     "placeholder": "RSS URL",
     "submit": "Add",
-    "example": "Example: https://en.hexlet.io/lessons.rss"
+    "example": "Example:",
+    "link": "http://lorem-rss.herokuapp.com/feed?unit=second&interval=30"
   },
   "modal": {
     "read": "Read",

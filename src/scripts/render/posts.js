@@ -2,8 +2,12 @@ import i18next from "i18next";
 
 import getHeader from "./blockHeader.js";
 
-const getPostItem = (data) => {
+const getPostItem = (data, options) => {
   const { id, title, link } = data;
+  const { isRead } = options;
+
+  const linkClass = isRead ? "link-secondary fw-normal" : "fw-bold";
+
   return (
     `<li class="list-group-item
       d-flex
@@ -13,9 +17,9 @@ const getPostItem = (data) => {
       border-end-0"
     >
       <a 
-        href=${link}
-        class="fw-bold"
-        data-id=${id}
+        href="${link}"
+        class="${linkClass}"
+        data-id="${id}"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -36,7 +40,7 @@ const getPostItem = (data) => {
 
 const renderPosts = (element, data) => {
   element.innerHTML = "";
-  const { ids, list } = data;
+  const { ids, list, read } = data;
 
   if (!ids.length) {
     element.innerHTML = "";
@@ -47,7 +51,8 @@ const renderPosts = (element, data) => {
   postsList.classList.add("list-group", "border-0", "rounded-0");
 
   ids.forEach((id) => {
-    const newPost = getPostItem(list[id]);
+    const isRead = read.includes(id);
+    const newPost = getPostItem(list[id], {isRead});
     postsList.innerHTML += newPost;
   });
 

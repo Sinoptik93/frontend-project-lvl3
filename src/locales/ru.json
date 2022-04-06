@@ -9,7 +9,8 @@
   "form": {
     "placeholder": "Ссылка RSS",
     "submit": "Добавить",
-    "example": "Пример: https://ru.hexlet.io/lessons.rss"
+    "example": "Пример:",
+    "link": "https://ru.hexlet.io/lessons.rss"
   },
   "modal": {
     "read": "Читать полностью",

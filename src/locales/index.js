@@ -19,7 +19,8 @@ const renderLocale = () => {
   document.querySelector("#input-placeholder").innerHTML =
     i18next.t("form.placeholder");
   document.querySelector("#submit-button").innerHTML = i18next.t("form.submit");
-  document.querySelector("#form-example").innerHTML = i18next.t("form.example");
+  document.querySelector("#form-example").innerText = i18next.t("form.example");
+  document.querySelector("#clip-example").innerText = i18next.t("form.link");
 
   // FOOTER
   document.querySelector("#created-by").innerHTML =
