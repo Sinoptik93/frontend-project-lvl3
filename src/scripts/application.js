@@ -148,5 +148,11 @@ const application = () => {
         state.form.messages.push(...errors);
       });
   });
+
+  const example = document.querySelector("#clip-example");
+  example.addEventListener("click", (event) => {
+    event.preventDefault();
+    navigator.clipboard.writeText("test").then(result => console.log(result));
+  })
 };
 export default application;
