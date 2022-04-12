@@ -13,6 +13,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
+  "main": "./src/scripts/init.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sinoptik93/frontend-project-lvl3.git"
