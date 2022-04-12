@@ -1,5 +1,6 @@
 import i18next from "i18next";
-import { isEqual, differenceWith } from "lodash";
+import differenceWith from 'lodash/differenceWith.js';
+import isEqual from "lodash/isEqual.js";
 import validateUrl from "./helpers/validate.js";
 import getRSSData from "./helpers/api.js";
 import getWatchedState from "./render.js";
