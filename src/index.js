@@ -1,6 +1,4 @@
 // eslint-disable-next-line no-unused-vars
-import { Modal } from 'bootstrap';
-import './scripts/app.scss';
-import init from "./scripts/init.js";
-
-init();
+import { Modal, Tooltip } from 'bootstrap';
+import './app.scss';
+import './application.js';

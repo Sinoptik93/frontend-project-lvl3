@@ -10,7 +10,7 @@
     "placeholder": "Ссылка RSS",
     "submit": "Добавить",
     "example": "Пример:",
-    "link": "https://ru.hexlet.io/lessons.rss"
+    "link": "http://lorem-rss.herokuapp.com/feed?unit=second&interval=10"
   },
   "modal": {
     "read": "Читать полностью",

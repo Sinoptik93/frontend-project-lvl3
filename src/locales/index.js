@@ -26,6 +26,21 @@ const renderLocale = () => {
   document.querySelector("#created-by").innerHTML =
     i18next.t("footer.createdBy");
 
+  // POSTS
+  const posts = document.querySelector(".h2.m-0");
+  if (posts) {
+    posts.innerText = i18next.t("posts.heading");
+    document.querySelectorAll(".btn.btn-outline-primary.btn-sm").forEach((button) => {
+      button.innerText = i18next.t("posts.openModal");
+    })
+  }
+
+  // FEEDS
+  const feeds = document.querySelector(".h3.m-0");
+  if (feeds) {
+    feeds.innerText = i18next.t("feeds.heading");
+  }
+
   // ERRORS
   setLocale({
     string: {

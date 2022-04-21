@@ -1,4 +1,5 @@
-import getHeader from "./blockHeader.js";
+import i18next from "i18next";
+import getBlockHeader from "../helpers/getBlockHeader.js";
 
 const getFeedItem = (data) => {
   const { title, description } = data;
@@ -36,7 +37,7 @@ const renderFeeds = (element, feedsData) => {
     feedsList.appendChild(newFeed);
   });
 
-  element.appendChild(getHeader("h6"));
+  element.appendChild(getBlockHeader(i18next.t("feeds.heading"), "h3"));
   element.appendChild(feedsList);
 };
 

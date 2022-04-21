@@ -1,4 +1,4 @@
-import api from "../src/scripts/helpers/api.js";
+import api from "../src/helpers/api.js";
 
 const URL = "https://jsonplaceholder.typicode.com/todos/1";
 const EXAMPLE_RESPONSE = {

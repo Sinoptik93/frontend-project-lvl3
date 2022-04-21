@@ -10,7 +10,7 @@
     "placeholder": "RSS URL",
     "submit": "Add",
     "example": "Example:",
-    "link": "http://lorem-rss.herokuapp.com/feed?unit=second&interval=30"
+    "link": "http://lorem-rss.herokuapp.com/feed?unit=second&interval=10"
   },
   "modal": {
     "read": "Read",

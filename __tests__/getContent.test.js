@@ -1,12 +1,12 @@
-import getContent from "../src/scripts/helpers/getContent.js";
+import getContent from "../src/helpers/getContent.js";
 
-const RSS_URL = "https://ru.hexlet.io/lessons.rss";
-const BAD_RSS_URL = "htts://ru.hexlet.io/lessons.rss";
+const VALID_RSS_URL = "https://ru.hexlet.io/lessons.rss";
+const INVALID_RSS_URL = "htts://ru.hexlet.io/lessons.rss";
 
 describe("test rss response", () => {
   it("success response 'heroku' data item:", () =>
-    expect(getContent(RSS_URL)).resolves.not.toBeNull());
+    expect(getContent(VALID_RSS_URL)).resolves.not.toBeNull());
 
   it("bad request 'heroku' data item:", () =>
-    expect(getContent(BAD_RSS_URL)).resolves.toBeNull());
+    expect(getContent(INVALID_RSS_URL)).resolves.toBeNull());
 });
