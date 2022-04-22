@@ -1,5 +1,5 @@
 import i18next from "i18next";
-import { Tooltip } from 'bootstrap';
+import Tooltip from 'bootstrap/js/dist/tooltip.js';
 import differenceWith from 'lodash/differenceWith.js';
 import isEqual from "lodash/isEqual.js";
 import validateUrl from "./helpers/validate.js";
