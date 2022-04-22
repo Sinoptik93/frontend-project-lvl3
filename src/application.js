@@ -159,7 +159,8 @@ const application = () => {
       .writeText(example.textContent)
       .then(() => console.log(`Copied to clipboard: ${event.target.textContent}`));
   })
+
+  initLocale();
 };
 
-application();
-initLocale();
+export default application;
