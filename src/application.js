@@ -59,7 +59,7 @@ const application = () => {
 
   const getDataList = (feedList) => Promise.all(feedList.map((feed) => getRSSData(feed.url)));
   const parsedFeedsList = (xmlList) => xmlList.map(({data, config: {url}}) => {
-    const parsedFeed = parseXml(data);
+    const parsedFeed = parseXml(data.contents);
     parsedFeed.feed.url = url;
     return parsedFeed;
   });
@@ -110,7 +110,7 @@ const application = () => {
         if (isNewFeed(validUrl)) {
           getRSSData(validUrl)
             .then((rawXml) => {
-              const {feed, posts} = parseXml(rawXml.data);
+              const {feed, posts} = parseXml(rawXml.data.contents);
               feed.url = validUrl;
 
               state.feeds.push(feed);
