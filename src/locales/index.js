@@ -19,11 +19,27 @@ const renderLocale = () => {
   document.querySelector("#input-placeholder").innerHTML =
     i18next.t("form.placeholder");
   document.querySelector("#submit-button").innerHTML = i18next.t("form.submit");
-  document.querySelector("#form-example").innerHTML = i18next.t("form.example");
+  document.querySelector("#form-example").innerText = i18next.t("form.example");
+  document.querySelector("#clip-example").innerText = i18next.t("form.link");
 
   // FOOTER
   document.querySelector("#created-by").innerHTML =
     i18next.t("footer.createdBy");
+
+  // POSTS
+  const posts = document.querySelector(".h2.m-0");
+  if (posts) {
+    posts.innerText = i18next.t("posts.heading");
+    document.querySelectorAll(".btn.btn-outline-primary.btn-sm").forEach((button) => {
+      button.innerText = i18next.t("posts.openModal");
+    })
+  }
+
+  // FEEDS
+  const feeds = document.querySelector(".h3.m-0");
+  if (feeds) {
+    feeds.innerText = i18next.t("feeds.heading");
+  }
 
   // ERRORS
   setLocale({

@@ -1,4 +1,4 @@
-import validateUrl from "../src/scripts/helpers/validate.js";
+import validateUrl from "../src/helpers/validate.js";
 
 describe('validate url', () => {
   it("resolved result:", () =>

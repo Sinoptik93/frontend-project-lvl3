@@ -1,9 +1,12 @@
 import i18next from "i18next";
 
-import getHeader from "./blockHeader.js";
+import getBlockHeader from "../helpers/getBlockHeader.js";
 
-const getPostItem = (data) => {
-  const { id, title, link } = data;
+const getPostItem = (data, { isRead = false }) => {
+  const { title, link } = data;
+
+  const linkClass = isRead ? "link-secondary fw-normal" : "fw-bold";
+
   return (
     `<li class="list-group-item
       d-flex
@@ -13,9 +16,9 @@ const getPostItem = (data) => {
       border-end-0"
     >
       <a 
-        href=${link}
-        class="fw-bold"
-        data-id=${id}
+        href="${link}"
+        class="${linkClass}"
+        data-id="${link}"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -24,7 +27,7 @@ const getPostItem = (data) => {
         <button 
           type="button" 
           class="btn btn-outline-primary btn-sm"
-          data-id=${id}
+          data-id=${link}
           data-bs-toggle="modal"
           data-bs-target="#modal"
         >
@@ -36,9 +39,9 @@ const getPostItem = (data) => {
 
 const renderPosts = (element, data) => {
   element.innerHTML = "";
-  const { ids, list } = data;
+  const { posts, readList } = data;
 
-  if (!ids.length) {
+  if (!posts.length) {
     element.innerHTML = "";
     return;
   }
@@ -46,12 +49,13 @@ const renderPosts = (element, data) => {
   const postsList = document.createElement("ul");
   postsList.classList.add("list-group", "border-0", "rounded-0");
 
-  ids.forEach((id) => {
-    const newPost = getPostItem(list[id]);
+  posts.forEach((post) => {
+    const isRead = readList.includes(post.link);
+    const newPost = getPostItem(post, {isRead});
     postsList.innerHTML += newPost;
   });
 
-  element.appendChild(getHeader("h4"));
+  element.appendChild(getBlockHeader(i18next.t("posts.heading"), "h2"));
   element.appendChild(postsList);
 };
 
