@@ -1,5 +1,10 @@
 import axios from "axios";
 
-const api = (url) => axios.get(`https://allorigins.hexlet.app/get?url=${encodeURIComponent(url)}`);
+const api = (url) => {
+  const proxyUrl = new URL('https://allorigins.hexlet.app');
+  proxyUrl.searchParams.append('url', url);
+  proxyUrl.searchParams.append('disableCache', 'true');
+  return axios.get(proxyUrl.toString());
+}
 
 export default api;
